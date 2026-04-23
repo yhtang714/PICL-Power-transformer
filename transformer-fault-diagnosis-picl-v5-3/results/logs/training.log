@@ -1,0 +1,76 @@
+2026-04-23 10:37:22,193  picl.main             INFO     Loading datasets from data/dga_1648_samples_stratified_no_source.csv
+2026-04-23 10:37:22,216  picl.main             INFO     train=987  cal=331  test=330   missing in train=185
+2026-04-23 10:37:22,225  picl.trainer          INFO     SCM intercept mu initialised from training means
+2026-04-23 10:37:22,225  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:22,225  picl.trainer          INFO     PHASE 1  joint structure + weight learning on original data
+2026-04-23 10:37:22,225  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:26,439  picl.trainer          INFO       final loss = 10.6524
+2026-04-23 10:37:26,439  picl.trainer          INFO     ----------------------------------------------------------------------
+2026-04-23 10:37:26,439  picl.trainer          INFO     Causal graph after Phase 1
+2026-04-23 10:37:26,439  picl.trainer          INFO     ----------------------------------------------------------------------
+2026-04-23 10:37:26,439  picl.trainer          INFO     Hard edges (from IEC 60599):
+2026-04-23 10:37:26,439  picl.trainer          INFO       PD   -> H2      w = +1.3670
+2026-04-23 10:37:26,439  picl.trainer          INFO       D1   -> C2H2    w = +0.8488
+2026-04-23 10:37:26,439  picl.trainer          INFO       D2   -> C2H2    w = +0.7025
+2026-04-23 10:37:26,439  picl.trainer          INFO       D2   -> H2      w = +0.4910
+2026-04-23 10:37:26,439  picl.trainer          INFO       T1   -> CH4     w = +0.4928
+2026-04-23 10:37:26,439  picl.trainer          INFO       T3   -> C2H4    w = +0.8339
+2026-04-23 10:37:26,439  picl.trainer          INFO     Learned discoverable edges:
+2026-04-23 10:37:26,439  picl.trainer          INFO       C2H4 -> C2H2    w = +0.2053   pi = 0.606   var = 0.0774   [unknown]
+2026-04-23 10:37:26,439  picl.trainer          INFO       CH4  -> C2H2    w = +0.1901   pi = 0.565   var = 0.0807   [unknown]
+2026-04-23 10:37:26,439  picl.trainer          INFO       T2   -> C2H4    w = +0.1577   pi = 0.599   var = 0.0218   [plausible]
+2026-04-23 10:37:26,439  picl.trainer          INFO       CH4  -> H2      w = +0.1505   pi = 0.576   var = 0.0798   [unknown]
+2026-04-23 10:37:26,440  picl.trainer          INFO     Weak-signal edges (|w|>0.10, below keep threshold, for reference):
+2026-04-23 10:37:26,440  picl.trainer          INFO       H2   -> CH4     w = +0.1806   pi = 0.542
+2026-04-23 10:37:26,440  picl.trainer          INFO       C2H6 -> C2H2    w = +0.1588   pi = 0.539
+2026-04-23 10:37:26,440  picl.trainer          INFO       C2H6 -> H2      w = +0.1319   pi = 0.540
+2026-04-23 10:37:26,440  picl.trainer          INFO       C2H4 -> C2H6    w = +0.1314   pi = 0.539
+2026-04-23 10:37:26,440  picl.trainer          INFO       C2H4 -> H2      w = +0.1283   pi = 0.542
+2026-04-23 10:37:26,440  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:26,440  picl.trainer          INFO     PHASE 2a  imputation + counterfactual augmentation
+2026-04-23 10:37:26,440  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:26,447  picl.trainer          INFO       imputed 185 missing entries using conditional-Gaussian mean
+2026-04-23 10:37:27,108  picl.trainer          INFO       augmented set: 987 real + 2725 synthetic = 3712 total
+2026-04-23 10:37:27,108  picl.trainer          INFO       synthetic samples per class: [617, 571, 311, 626, 145, 455]
+2026-04-23 10:37:27,108  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:27,108  picl.trainer          INFO     PHASE 2b  structure refinement (real samples only)
+2026-04-23 10:37:27,108  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:28,241  picl.trainer          INFO       final loss = 10.0080
+2026-04-23 10:37:28,241  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:28,241  picl.trainer          INFO     PHASE 2b  parameter re-estimation (all samples)
+2026-04-23 10:37:28,241  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:29,057  picl.trainer          INFO       final loss = 8.0739
+2026-04-23 10:37:29,057  picl.trainer          INFO     ----------------------------------------------------------------------
+2026-04-23 10:37:29,057  picl.trainer          INFO     Causal graph after Phase 2b
+2026-04-23 10:37:29,057  picl.trainer          INFO     ----------------------------------------------------------------------
+2026-04-23 10:37:29,057  picl.trainer          INFO     Hard edges (from IEC 60599):
+2026-04-23 10:37:29,057  picl.trainer          INFO       PD   -> H2      w = +1.6581
+2026-04-23 10:37:29,057  picl.trainer          INFO       D1   -> C2H2    w = +1.1450
+2026-04-23 10:37:29,057  picl.trainer          INFO       D2   -> C2H2    w = +0.9106
+2026-04-23 10:37:29,057  picl.trainer          INFO       D2   -> H2      w = +0.6319
+2026-04-23 10:37:29,057  picl.trainer          INFO       T1   -> CH4     w = +0.6186
+2026-04-23 10:37:29,057  picl.trainer          INFO       T3   -> C2H4    w = +1.0492
+2026-04-23 10:37:29,057  picl.trainer          INFO     Learned discoverable edges:
+2026-04-23 10:37:29,057  picl.trainer          INFO       T2   -> C2H4    w = -0.1149   pi = 0.608   var = 0.0216   [plausible]
+2026-04-23 10:37:29,057  picl.trainer          INFO       CH4  -> H2      w = +0.1092   pi = 0.576   var = 0.0797   [unknown]
+2026-04-23 10:37:29,057  picl.trainer          INFO     Weak-signal edges (|w|>0.10, below keep threshold, for reference):
+2026-04-23 10:37:29,057  picl.trainer          INFO       T1   -> C2H4    w = -0.4929   pi = 0.503
+2026-04-23 10:37:29,057  picl.trainer          INFO       T1   -> C2H2    w = -0.4796   pi = 0.511
+2026-04-23 10:37:29,057  picl.trainer          INFO       T1   -> H2      w = -0.4513   pi = 0.504
+2026-04-23 10:37:29,057  picl.trainer          INFO       T2   -> C2H2    w = -0.4152   pi = 0.502
+2026-04-23 10:37:29,057  picl.trainer          INFO       D2   -> CH4     w = -0.4039   pi = 0.500
+2026-04-23 10:37:29,064  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:29,064  picl.trainer          INFO     PHASE 4  non-linear classifier head on SCM + DGA-ratio features
+2026-04-23 10:37:29,064  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:35,738  picl.trainer          INFO       trained classifier head (gradient_boosting+ensemble) in 6.7s
+2026-04-23 10:37:35,738  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:35,738  picl.trainer          INFO     PHASE 3  temperature calibration + gate + evaluation
+2026-04-23 10:37:35,739  picl.trainer          INFO     ======================================================================
+2026-04-23 10:37:35,760  picl.trainer          INFO       temperature T = 0.0000
+2026-04-23 10:37:35,764  picl.trainer          INFO       gamma* = 0.6372 (mode=target_cov, target_cov=0.879)
+2026-04-23 10:37:35,768  picl.trainer          INFO       TEST  accuracy (all)      = 0.9424
+2026-04-23 10:37:35,768  picl.trainer          INFO       TEST  accuracy (accepted) = 0.9716
+2026-04-23 10:37:35,768  picl.trainer          INFO       TEST  coverage            = 0.8545
+2026-04-23 10:37:35,769  picl.trainer          INFO       TEST  ECE                 = 0.0515
+2026-04-23 10:37:35,772  picl.trainer          INFO     Saved model to results/models/picl_final_model.pt
+2026-04-23 10:37:35,773  picl.trainer          INFO     Saved summary to results/results_summary.json
