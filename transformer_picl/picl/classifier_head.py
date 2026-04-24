@@ -1,8 +1,3 @@
-# Phase 4: non-linear classifier head.
-# Use the trained SCM as a feature extractor and concatenate classical DGA
-# log-ratio features, then train GB/RF/LR on top. The linear-Gaussian SCM's
-# native class posterior (Eq. 16) is linear in y, which caps accuracy at
-# around 82% on this dataset. A non-linear classifier breaks that ceiling.
 
 from __future__ import annotations
 
@@ -127,9 +122,6 @@ def train_classifier_head(cfg: PICLConfig,
                           ds_train: PICLDataset,
                           graph: HybridCausalGraph,
                           scm: LinearGaussianSCM) -> ClassifierHead:
-    # train_on_real_only=True skips synthetic samples: the linear SCM's
-    # generated samples don't match the real non-linear class boundary, so
-    # training on them tends to hurt rather than help.
     hc = cfg.raw.get("classifier_head", {})
     real_only = bool(hc.get("train_on_real_only", False))
 
@@ -152,9 +144,6 @@ def classifier_posterior(head: ClassifierHead,
                          ds: PICLDataset,
                          graph: HybridCausalGraph,
                          scm: LinearGaussianSCM) -> torch.Tensor:
-    # Ensemble: average predict_proba outputs. sklearn's classes_ may not
-    # cover all K classes (if some class is absent in training), so we
-    # realign by class id.
     X = extract_scm_features(ds, graph, scm)
     N = X.shape[0]
     out = np.zeros((N, head.n_classes), dtype=np.float32)
