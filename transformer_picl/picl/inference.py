@@ -1,10 +1,3 @@
-# Module E: inference side.
-#   - joint-Gaussian class posterior P(f=k | y)
-#   - S=50 BMA: sample S graphs from q(Gamma), average per-graph posteriors
-#   - Ed (causal disablement) and Es (causal sufficiency) scores
-#   - composite score = 0.4 posterior + 0.3 Ed + 0.3 Es
-#   - temperature calibration + gate threshold search
-
 from __future__ import annotations
 
 import math
