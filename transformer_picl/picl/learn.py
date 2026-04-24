@@ -1,9 +1,3 @@
-# ELBO training loop. Objective:
-#   L = E[log p(X | A, W, sigma)] - KL(q||p0) - lam_h * h(E[A]) - lam_ce * CE(post, y)
-# The last term is a discriminative auxiliary loss that pushes W and sigma
-# toward configurations that separate classes. Without it the pure generative
-# ELBO tends to pool classes with overlapping gas signatures.
-
 from __future__ import annotations
 
 from dataclasses import dataclass
