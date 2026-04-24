@@ -2,7 +2,7 @@
 #   Phase 1   joint graph + SCM param learning on original data
 #   Phase 2a  impute missing values + counterfactual augmentation
 #   Phase 2b  refit structure (real samples only), then refit params (all samples)
-#   Phase 4   (optional) non-linear classifier head
+#   Phase 4   non-linear classifier head
 #   Phase 3   temperature calibration + gate + evaluation
 
 from __future__ import annotations
@@ -85,8 +85,7 @@ def train_picl(cfg: PICLConfig,
     n_sources = int(cfg.raw["data"]["n_sources"])
     n_vars = cfg.n_vars
 
-    # Warm-start mu from training means. Zero-mean assumption would bias
-    # the class posterior badly since one-hot fault columns are far from zero.
+
     graph = HybridCausalGraph(cfg)
     scm = LinearGaussianSCM(n_vars=n_vars, n_sources=n_sources,
                             init_log_var=float(cfg.raw["model"]["noise_log_var_init"]))
@@ -154,7 +153,7 @@ def train_picl(cfg: PICLConfig,
     cal_imputed = impute_training_set(cal, graph, scm, log_mu, log_sd)
     test_imputed = impute_training_set(test, graph, scm, log_mu, log_sd)
 
-    # --- Phase 4: non-linear classifier head (optional) ---
+    # --- Phase 4: non-linear classifier head ---
     head = None
     clf_post_cal = clf_post_test = clf_post_train = None
     if cfg.raw.get("classifier_head", {}).get("enabled", False):
