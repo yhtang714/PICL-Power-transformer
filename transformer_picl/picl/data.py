@@ -1,7 +1,3 @@
-# Data loading. CSV 'split' column gives the 987/331/330 train/cal/test split.
-# No source column in the CSV, so we partition into n_sources synthetic sources
-# via stratified round-robin.
-
 from __future__ import annotations
 
 from dataclasses import dataclass
