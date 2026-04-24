@@ -1,10 +1,3 @@
-# Linear-Gaussian SCM. Variables laid out as V = [f_1..f_K, y_1..y_G].
-# Structural equations: V_i = mu_i + sum_j W[j,i] (V_j - mu_j) + eps_i.
-# The per-variable intercept mu is necessary because the one-hot fault block
-# has mean equal to the class frequencies, and the log-z gas block is not
-# exactly mean-zero at inference time either. A zero-mean SCM biases the
-# class posterior noticeably.
-
 from __future__ import annotations
 
 import math
