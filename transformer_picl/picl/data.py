@@ -70,16 +70,12 @@ def load_picl_datasets(cfg: PICLConfig):
     seed = int(cfg.raw["experiment"]["seed"])
     feature_mode = str(cfg.raw["data"].get("gas_feature_mode", "proportion"))
 
-    # log_ppm is always computed from log1p(ppm). Missing cells get log1p(0)=0
-    # as a placeholder; they will be replaced after Phase 2a by Module D's
-    # conditional-Gaussian mean (inverted through the z-score).
+
     gas_raw_full = df[cfg.gas_names].to_numpy(dtype=np.float64)
     log_ppm_full = np.log1p(np.where(np.isnan(gas_raw_full), 0.0,
                                      gas_raw_full)).astype(np.float32)
 
-    # z-score stats use training-observed entries only (nanmean/nanstd).
-    # Median-filling NaNs before computing stats is biased - a rare class's
-    # true distribution gets dragged toward the majority classes.
+
     log_mu = None
     log_sd = None
     if feature_mode == "log1p_z":
@@ -102,10 +98,6 @@ def load_picl_datasets(cfg: PICLConfig):
         log_ppm = log_ppm_full[sub_mask]
 
         if feature_mode == "log1p_z":
-            # Placeholder 0 at missing cells (= z-score mean). The SCM
-            # log-likelihood marginalises them out via miss_mask, so the
-            # specific value does not matter. Module D replaces them with
-            # conditional means later.
             log_sub = np.log1p(np.where(np.isnan(gas_raw), 0.0, gas_raw))
             gas_filled = ((log_sub - log_mu) / log_sd).astype(np.float32)
             gas_filled[miss_gas] = 0.0
