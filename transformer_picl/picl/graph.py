@@ -175,11 +175,6 @@ class HybridCausalGraph(nn.Module):
                 for i, e in enumerate(self.hard_edges)]
 
     def edge_posterior_summary(self) -> List[Dict]:
-        # Posterior stats per discoverable edge.
-        # kept = large enough weight AND real structural support (pi clearly
-        # above 0.5 OR posterior variance noticeably tighter than the prior).
-        # Weight alone is not enough - Phase 2b's parameter-only pass can push
-        # weights around without moving pi, so we must require both.
         pis = self.edge_prob_mean().detach().cpu().tolist()
         vars_ = self.edge_prob_var().detach().cpu().tolist()
         weights = self.w_disc.detach().cpu().tolist() if self.w_disc.numel() > 0 else []
